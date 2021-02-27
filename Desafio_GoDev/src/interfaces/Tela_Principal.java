@@ -137,7 +137,7 @@ public class Tela_Principal extends JFrame {
 				JOptionPane.showMessageDialog(contentPane, ioe.getMessage());
 			}
 
-			// caso n„o exista o arquivo, as linkedlists s„o criadas vazias
+			// caso n√£o exista o arquivo, as linkedlists s√£o criadas vazias
 		} else {
 
 			setPessoas(new LinkedList<Pessoa>());
@@ -188,7 +188,7 @@ public class Tela_Principal extends JFrame {
 		JButton btnCadastrarPessoa = new JButton("cadastrar");
 		btnCadastrarPessoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// ir· cadastrar a pessoa
+				// ir√° cadastrar a pessoa
 				try {
 
 					String nome = tfNomePessoa.getText().trim();
@@ -199,7 +199,7 @@ public class Tela_Principal extends JFrame {
 					pessoa.setSobrenome(sobrenome);
 
 					if (getPessoas().contains(pessoa)) {
-						JOptionPane.showMessageDialog(contentPane, nome + " " + sobrenome + " j· cadastrado.");
+						JOptionPane.showMessageDialog(contentPane, nome + " " + sobrenome + " j√° cadastrado.");
 					} else {
 						getPessoas().add(pessoa);
 
@@ -240,10 +240,10 @@ public class Tela_Principal extends JFrame {
 		JButton btnCadastrarSala = new JButton("cadastrar");
 		btnCadastrarSala.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// ir· cadastrar a sala
+				// ir√° cadastrar a sala
 				try {
 					if (cbTiposSalaCadastro.getSelectedIndex() == 0) {
-						JOptionPane.showMessageDialog(contentPane, "O tipo da sala n„o foi informado.");
+						JOptionPane.showMessageDialog(contentPane, "O tipo da sala n√£o foi informado.");
 					} else {
 						String nome = tfNomeSala.getText().trim();
 						Sala sala = null;
@@ -253,7 +253,7 @@ public class Tela_Principal extends JFrame {
 							sala = new SalaEvento();
 							break;
 
-						case 2: // Sala cafÈ
+						case 2: // Sala caf√©
 							sala = new SalaCafe();
 							break;
 						}
@@ -261,7 +261,7 @@ public class Tela_Principal extends JFrame {
 						sala.setNome(nome);
 
 						if (getSalas().contains(sala)) {
-							JOptionPane.showMessageDialog(contentPane, "Sala '" + nome + "' j· cadastrada.");
+							JOptionPane.showMessageDialog(contentPane, "Sala '" + nome + "' j√° cadastrada.");
 						} else {
 							cbSalas.addItem(sala);
 							getSalas().add(sala);
@@ -330,8 +330,8 @@ public class Tela_Principal extends JFrame {
 		JButton btnConsultaPessoa = new JButton("consultar");
 		btnConsultaPessoa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// ir· consultar e retornar os dados que tiver sobre a pessoa passada como
-				// par‚metro
+				// ir√° consultar e retornar os dados que tiver sobre a pessoa passada como
+				// par√¢metro
 
 				try {
 					boolean encontrou = false;
@@ -383,8 +383,8 @@ public class Tela_Principal extends JFrame {
 		JButton btnConsultaSala = new JButton("consultar");
 		btnConsultaSala.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// ir· consultar e retornar os dados que tiver sobre a sala passada como
-				// par‚metro
+				// ir√° consultar e retornar os dados que tiver sobre a sala passada como
+				// par√¢metro
 
 				try {
 					boolean encontrou = false;
@@ -398,7 +398,7 @@ public class Tela_Principal extends JFrame {
 							classe = "SalaEvento";
 							break;
 
-						case 2: // Sala cafÈ
+						case 2: // Sala caf√©
 							classe = "SalaCafe";
 							break;
 						}
@@ -473,7 +473,7 @@ public class Tela_Principal extends JFrame {
 		JButton btnAdicionar = new JButton("adicionar");
 		btnAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// adiciona ‡ sala as pessoas selecionadas
+				// adiciona √† sala as pessoas selecionadas
 
 				try {
 					if (cbSalas.getSelectedIndex() == 0) {
@@ -482,19 +482,22 @@ public class Tela_Principal extends JFrame {
 						Sala sala = (Sala) cbSalas.getSelectedItem();
 
 						if (sala == null) {
-							JOptionPane.showMessageDialog(contentPane, "Sala n„o encontrada.");
+							JOptionPane.showMessageDialog(contentPane, "Sala n√£o encontrada.");
 						} else {
-							for (Pessoa pessoa : getPessoasAdicionar()) {
-								sala.adicionarPessoa(pessoa);
-								pessoa.addSala(sala);
+							if (getPessoasAdicionar().isEmpty()) {
+								JOptionPane.showMessageDialog(contentPane, "Selecione pessoas para adicionar.");
+							} else {
+								for (Pessoa pessoa : getPessoasAdicionar()) {
+									sala.adicionarPessoa(pessoa);
+									pessoa.addSala(sala);
+								}
+
+								JOptionPane.showMessageDialog(contentPane, "Pessoa(s) adicionada(s) com sucesso.");
+
+								getPessoasAdicionar().clear();
+								carregarTabelaForaSalaFiltrada(sala);
+								carregarTabelaSalaFiltrada(sala);
 							}
-
-							JOptionPane.showMessageDialog(contentPane, "Pessoa(s) adicionada(s) com sucesso.");
-
-							getPessoasAdicionar().clear();
-							carregarTabelaForaSalaFiltrada(sala);
-							carregarTabelaSalaFiltrada(sala);
-
 						}
 					}
 				} catch (IllegalArgumentException iae) {
@@ -513,7 +516,7 @@ public class Tela_Principal extends JFrame {
 		cbSalas.setModel(new DefaultComboBoxModel(new String[] { "" }));
 		cbSalas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// gerencia a aba de aÁıes de acordo com a sala selecionada
+				// gerencia a aba de a√ß√µes de acordo com a sala selecionada
 
 				if (cbSalas.getSelectedIndex() == 0) {
 					DefaultTableModel model = null;
@@ -540,7 +543,7 @@ public class Tela_Principal extends JFrame {
 		tabelaPessoasForaSala.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// seleciona a pessoa da tabela e sinaliza que que ela ser· adicionada ‡ sala
+				// seleciona a pessoa da tabela e sinaliza que que ela ser√° adicionada √† sala
 
 				int linha = tabelaPessoasForaSala.getSelectedRow();
 				String nome = tabelaPessoasForaSala.getValueAt(linha, 0).toString() + " "
@@ -549,7 +552,7 @@ public class Tela_Principal extends JFrame {
 				Pessoa pessoa = buscarPessoa(nome);
 
 				if (pessoa == null) {
-					JOptionPane.showMessageDialog(contentPane, "Pessoa n„o encontrada.");
+					JOptionPane.showMessageDialog(contentPane, "Pessoa n√£o encontrada.");
 				} else {
 					if (getPessoasAdicionar().contains(pessoa)) {
 						getPessoasAdicionar().remove(pessoa);
@@ -592,19 +595,22 @@ public class Tela_Principal extends JFrame {
 						Sala sala = (Sala) cbSalas.getSelectedItem();
 
 						if (sala == null) {
-							JOptionPane.showMessageDialog(contentPane, "Sala n„o encontrada.");
+							JOptionPane.showMessageDialog(contentPane, "Sala n√£o encontrada.");
 						} else {
-							for (Pessoa pessoa : getPessoasRemover()) {
-								sala.removerPessoa(pessoa);
-								pessoa.removerSala(sala);
+							if (getPessoasRemover().isEmpty()) {
+								JOptionPane.showMessageDialog(contentPane, "Selecione pessoas para remover.");
+							} else {
+								for (Pessoa pessoa : getPessoasRemover()) {
+									sala.removerPessoa(pessoa);
+									pessoa.removerSala(sala);
+								}
+
+								JOptionPane.showMessageDialog(contentPane, "Pessoa(s) removida(s) com sucesso.");
+
+								getPessoasRemover().clear();
+								carregarTabelaForaSalaFiltrada(sala);
+								carregarTabelaSalaFiltrada(sala);
 							}
-
-							JOptionPane.showMessageDialog(contentPane, "Pessoa(s) removida(s) com sucesso.");
-
-							getPessoasRemover().clear();
-							carregarTabelaForaSalaFiltrada(sala);
-							carregarTabelaSalaFiltrada(sala);
-
 						}
 					}
 				} catch (IllegalArgumentException iae) {
@@ -627,7 +633,7 @@ public class Tela_Principal extends JFrame {
 		tabelaPessoasSala.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// seleciona a pessoa da tabela e sinaliza que que ela ser· removida da sala
+				// seleciona a pessoa da tabela e sinaliza que que ela ser√° removida da sala
 
 				int linha = tabelaPessoasSala.getSelectedRow();
 				String nome = tabelaPessoasSala.getValueAt(linha, 0).toString() + " "
@@ -636,7 +642,7 @@ public class Tela_Principal extends JFrame {
 				Pessoa pessoa = buscarPessoa(nome);
 
 				if (pessoa == null) {
-					JOptionPane.showMessageDialog(contentPane, "Pessoa n„o encontrada.");
+					JOptionPane.showMessageDialog(contentPane, "Pessoa n√£o encontrada.");
 				} else {
 					if (getPessoasRemover().contains(pessoa)) {
 						getPessoasRemover().remove(pessoa);
@@ -670,7 +676,7 @@ public class Tela_Principal extends JFrame {
 
 				if (isQtdPessoasMaior1()) {
 					JOptionPane.showMessageDialog(contentPane,
-							"O treinamento n„o pode ser iniciado, a diferenÁa da quantidade de pessoas nas salas È maior que 1 (um).");
+							"O treinamento n√£o pode ser iniciado, a diferen√ßa da quantidade de pessoas nas salas √© maior que 1 (um).");
 				} else {
 					if (isNaoIniciado()) {
 						setEtapa(1);
@@ -680,7 +686,7 @@ public class Tela_Principal extends JFrame {
 							setEtapa(2);
 							setIntervalo(false);
 						} else {
-							JOptionPane.showMessageDialog(contentPane, "O treinamento j· est· na etapa 2.");
+							JOptionPane.showMessageDialog(contentPane, "O treinamento j√° est√° na etapa 2.");
 						}
 					}
 				}
@@ -711,16 +717,16 @@ public class Tela_Principal extends JFrame {
 				// gerencia o intervalo
 
 				if (isNaoIniciado()) {
-					JOptionPane.showMessageDialog(contentPane, "O treinamento ainda n„o foi iniciado.");
+					JOptionPane.showMessageDialog(contentPane, "O treinamento ainda n√£o foi iniciado.");
 				} else {
 					if (isIntervalo()) {
-						JOptionPane.showMessageDialog(contentPane, "O treinamento j· est· no intervalo.");
+						JOptionPane.showMessageDialog(contentPane, "O treinamento j√° est√° no intervalo.");
 					} else {
 						setIntervalo(true);
 						tfStatusTreinamento.setText("intervalo");
 						ajustaQtdPessoas();
 						JOptionPane.showMessageDialog(contentPane,
-								"A troca de pessoas entre as salas foi realizada, verifique a lotaÁ„o antes de continuar.");
+								"A troca de pessoas entre as salas foi realizada, verifique a lota√ß√£o antes de continuar.");
 					}
 
 				}
@@ -733,7 +739,7 @@ public class Tela_Principal extends JFrame {
 		panel_1.add(btnIntervalo);
 	}
 
-	// mÈtodos
+	// m√©todos
 
 	// carrega a combobox com as salas cadastradas
 	private void carergarCbSalas() {
@@ -742,7 +748,7 @@ public class Tela_Principal extends JFrame {
 		}
 	}
 
-	// exibe as pessoas que pertencem ‡ sala selecionada
+	// exibe as pessoas que pertencem √† sala selecionada
 	private void carregarTabelaSalaFiltrada(Sala sala) {
 		DefaultTableModel model = (DefaultTableModel) tabelaPessoasSala.getModel();
 		model.setNumRows(0);
@@ -757,7 +763,7 @@ public class Tela_Principal extends JFrame {
 		}
 	}
 
-	// exibe as pessoas que n„o pertencem ‡ sala selecionada
+	// exibe as pessoas que n√£o pertencem √† sala selecionada
 	private void carregarTabelaForaSalaFiltrada(Sala sala) {
 		DefaultTableModel model = (DefaultTableModel) tabelaPessoasForaSala.getModel();
 		model.setNumRows(0);
@@ -805,7 +811,7 @@ public class Tela_Principal extends JFrame {
 		}
 	}
 
-	// retorna uma sala de evento que a pessoa (par‚metro) n„o possua
+	// retorna uma sala de evento que a pessoa (par√¢metro) n√£o possua
 	private Sala getSalaEventoDiferente(Pessoa pessoa) {
 
 		for (SalaEvento sala : getSalasEvento()) {
@@ -816,8 +822,8 @@ public class Tela_Principal extends JFrame {
 		return null;
 	}
 
-	// ajusta a quantidade de pessoas nas salas atÈ que a diferenÁa seja de no
-	// m·ximo 1
+	// ajusta a quantidade de pessoas nas salas at√© que a diferen√ßa seja de no
+	// m√°ximo 1
 	private void ajustaQtdPessoas() {
 		do {
 			trocarPessoas(selecionarPessoasTrocar());
@@ -836,7 +842,7 @@ public class Tela_Principal extends JFrame {
 		return salasEvento;
 	}
 
-	// retorna a pessoa que tiver o nome igual ao passado como par‚metro
+	// retorna a pessoa que tiver o nome igual ao passado como par√¢metro
 	private Pessoa buscarPessoa(String nomeCompleto) {
 
 		for (Pessoa pessoa : getPessoas()) {
@@ -848,7 +854,7 @@ public class Tela_Principal extends JFrame {
 		return null;
 	}
 
-	// verifica se a diferenÁa de pessoas entre as salas com maior e menor lotaÁ„o È
+	// verifica se a diferen√ßa de pessoas entre as salas com maior e menor lota√ß√£o √©
 	// maior que um
 	private boolean isQtdPessoasMaior1() {
 		if (getQtdSalaMaisPessoas() - getQtdSalaMenosPessoas() > 1) {
@@ -857,7 +863,7 @@ public class Tela_Principal extends JFrame {
 		return false;
 	}
 
-	// retorna a quantidade de pessoas da sala com maior lotaÁ„o
+	// retorna a quantidade de pessoas da sala com maior lota√ß√£o
 	private int getQtdSalaMaisPessoas() {
 
 		int maiorQtd = Integer.MIN_VALUE;
@@ -875,7 +881,7 @@ public class Tela_Principal extends JFrame {
 		return maiorQtd;
 	}
 
-	// retorna a quantidade de pessoas da sala com menor lotaÁ„o
+	// retorna a quantidade de pessoas da sala com menor lota√ß√£o
 	private int getQtdSalaMenosPessoas() {
 
 		int menorQtd = Integer.MAX_VALUE;
