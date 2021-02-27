@@ -26,7 +26,7 @@
  pessoas, basta informar o nome e o sobrenome. No cadastro de salas, deve-ser informar o tipo da sala (evento ou café) e então nomeá-la. Para realizar a busca de uma
  pessoa, basta informar o primeiro nome que será mostrado seu nome completo e as salas em que ficará. Na consulta de salas, informe o tipo e o nome que trará todos as pessoas 
  que ela receberá durante o treinamento. Na aba de gerenciamento de salas, você poderá adicionar ou remover pessoas à sala que informar pela combobox. Na tela de gerenciamento 
- do evento, você verá o status atual do treinamento e também poderá iniciar ele, ir para o intervalo. 
+ do evento, você verá o status atual do treinamento e também poderá iniciar ele e/ou ir para o intervalo. 
  
  Observação: 1. ao ir para o intervalo, metade das pessoas terão uma de suas sala de evento alterada para que haja maior interação. 
              2. o evento só será iniciado caso a diferença de pessoas em todas as salas seja de no máximo uma.
